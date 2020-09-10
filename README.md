@@ -1,1 +1,1 @@
-# Pythom_Small
+# Small Python projects by Eun Rho
