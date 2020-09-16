@@ -17,21 +17,21 @@ predict = "G3" # predicts the final score of the exam
 
 x = numpy.array(data.drop([predict],1))
 y = numpy.array(data[predict])
-x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(x,y, test_size = 0.1)
+x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(x,y, test_size = 0.1) #trains the algorithm and slects for the thesting purposes, detailed explanation at sklearn library explanation
 
 
 best = 0
 for _ in range(100):
-    x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(x,y, test_size = 0.1)
+    x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(x,y, test_size = 0.1) 
 
     linear = linear_model.LinearRegression()
 
-    linear.fit(x_train, y_train)
+    linear.fit(x_train, y_train) #fits the train value into a linear function
 
     acc = linear.score(x_test,y_test)
     print(acc)
-    if acc> best:
-        best = acc
+    if acc> best:  
+        best = acc  #overides the best value for each student in the range
         with open("studentmodel.pickle", "wb") as a:
             pickle.dump(linear, a)
 
