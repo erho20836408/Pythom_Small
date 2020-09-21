@@ -1,0 +1,29 @@
+
+#I do understand Gradio has it's own function for this, however the whole point is understanding the process of training the data from tensorflow to make my own unique feature, obviously since it has only 10 
+#epochs, the results do not correspon to the ideal value(100%)
+import gradio as gr
+import tensorflow as tf
+(x_train, y_train), (x_test, y_test) =tf.keras.datasets.mnist.load_data() # x_train stand for the all independent variable, y_train is the data will be predicted using this code
+x_train = x_train /255.0, # process to represent in a form of a binary matrix
+x_test = x_test / 255.0
+model = tf.keras.models.Sequential([
+        tf.keras.layers.Flatten(input_shape=(28,28)), #flatten output to a one dimensional collection of neurons,
+        tf.keras.layers.Dense(128,activation='relu'),
+        tf.keras.layers.Dense(10,activation='softmax') #layer having 10 neurons one corresponding to each class.
+])
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+model.fit(x_train, y_train, validation_data=(x_test, y_test),epochs=10) #fits the model and validates the data with 10 epochs
+
+def classify(image):
+    prediction = model.predict(image).tolist()[0]
+    return {str(i): prediction[i] for i in range(10)}
+sketchpad = gr.inputs.Sketchpad()
+label = gr.inputs.Sketchpad()
+label= gr.outputs.Label(num_top_classes=3)
+interface = gr.Interface(classify, sketchpad, label, live= True, capture_session=True)
+interface.launch()
+
+#the output:
+![Screenshot 2020-09-21 011939](https://user-images.githubusercontent.com/54910254/93735201-24490a00-fbaa-11ea-9aee-c195bf4062cc.png)
+
+ 
