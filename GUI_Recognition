@@ -24,6 +24,8 @@ interface = gr.Interface(classify, sketchpad, label, live= True, capture_session
 interface.launch()
 
 #the output:
-![Screenshot 2020-09-21 011939](https://user-images.githubusercontent.com/54910254/93735201-24490a00-fbaa-11ea-9aee-c195bf4062cc.png)
+
+![Screenshot 2020-09-21 011939](https://user-images.githubusercontent.com/54910254/93735232-480c5000-fbaa-11ea-92d5-fcccb8dd4a9b.png)
+
 
  
